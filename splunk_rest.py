@@ -14,7 +14,7 @@ def main():
   search_data = {'search': 'search index=_internal earliest=-1h@h |stats count by source',
               'output_mode': 'csv'}
   
-
+  # login to get a session key
   try:
     r = requests.get(login_url,
       data={'username':username,'password':password}, verify=False)
@@ -25,14 +25,16 @@ def main():
 
   session_key = minidom.parseString(r.text).getElementsByTagName('sessionKey')[0].firstChild.nodeValue
 
-  print('session key = {}'.format(session_key))
+  # print('session key = {}'.format(session_key))
 
-  # print('search_data = {}'.format(search_data))
-  r = requests.post(rest_url, data=search_data,
-    headers = { 'Authorization': 'Splunk {}'.format(session_key)},
-    verify = False)
+  try:
+    r = requests.post(rest_url, data=search_data,
+      headers = { 'Authorization': 'Splunk {}'.format(session_key)},
+      verify = False)
+  except e:
+    fail
 
-  print('r = {}'.format(r.text))
+  print('Result: \n{}'.format(r.text))
 
 
 if __name__ == "__main__":
