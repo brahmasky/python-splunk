@@ -27,6 +27,7 @@ def main():
 
   # print('session key = {}'.format(session_key))
 
+  # post the search data with session key as the Authroization header  
   try:
     r = requests.post(rest_url, data=search_data,
       headers = { 'Authorization': 'Splunk {}'.format(session_key)},
