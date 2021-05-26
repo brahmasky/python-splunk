@@ -8,7 +8,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 def auth_search():
   base_url = 'https://localhost:8089'
   username = 'admin'
-  password = 'Epicon123$'
+  password = 'Epicon123'
 
   login_url = f'{base_url}/servicesNS/-/-/auth/login'
   rest_url = f'{base_url}/services/search/jobs/export'
